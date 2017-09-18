@@ -14,12 +14,5 @@ def coin2(N):
         #print(x, '. Heads = ', heads)
         if heads == 50:
             count += 1
-            #print()
-    #tails = N - heads
+            #print('Count')
     print('probability of 50 Heads = ', count/N)
-    
-    
-    #p_heads = heads/N
-    #p_tails = tails/N
-    #print('probability of heads = ', p_heads)
-    #print('probability of tails = ', p_tails)
