@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Part 2 is not finished.
+Created on Mon Nov 27 10:50:27 2017
+
+@author: 012722695
 """
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
 
 def state3():
     times = 15
@@ -161,17 +162,6 @@ def state3Mult():
     calcR[0] = 1/4
     calcN[0] = 1/2
     calcS[0] = 1/4
-    w, h = 3, 3;
-#    matrix = [[0 for x in range(w)] for y in range(h)]
-#    matrix[0][0] = 1/3
-#    matrix[0][1] = 1/3
-#    matrix[0][2] = 1/3
-#    matrix[1][0] = 1/2
-#    matrix[1][1] = 0
-#    matrix[1][2] = 1/2
-#    matrix[2][0] = 1/4
-#    matrix[2][1] = 1/4
-#    matrix[2][2] = 1/2
     matrix = [[1/3,1/3,1/3]
              ,[1/2,  0,1/2]
              ,[1/4,1/4,1/2]]
@@ -218,12 +208,39 @@ def PageRank(s):
         calcC[0] = 0
         calcD[0] = 0
         calcE[0] = 1
-    #for x in range (1, times):
-        
+    for x in range (1, times):
+        calcA[x] = (calcA[x-1]*matrix[0][0]) + (calcB[x-1]*matrix[1][0]) + (calcC[x-1]*matrix[2][0]) + (calcD[x-1]*matrix[3][0]) + (calcE[x-1]*matrix[4][0])            
+        calcB[x] = (calcA[x-1]*matrix[0][1]) + (calcB[x-1]*matrix[1][1]) + (calcC[x-1]*matrix[2][1]) + (calcD[x-1]*matrix[3][1]) + (calcE[x-1]*matrix[4][1])
+        calcC[x] = (calcA[x-1]*matrix[0][2]) + (calcB[x-1]*matrix[1][2]) + (calcC[x-1]*matrix[2][2]) + (calcD[x-1]*matrix[3][2]) + (calcE[x-1]*matrix[4][2])
+        calcD[x] = (calcA[x-1]*matrix[0][3]) + (calcB[x-1]*matrix[1][3]) + (calcC[x-1]*matrix[2][3]) + (calcD[x-1]*matrix[3][3]) + (calcE[x-1]*matrix[4][3])
+        calcE[x] = (calcA[x-1]*matrix[0][4]) + (calcB[x-1]*matrix[1][4]) + (calcC[x-1]*matrix[2][4]) + (calcD[x-1]*matrix[3][4]) + (calcE[x-1]*matrix[4][4])
+                   
+    
+    list2 = [x for x in range(1, times+1)]
+    
+    plt.close('all')
+    
+    fig1 = plt.figure(1)
+    line1, = plt.plot(list2, calcA, label="A", 
+                      linestyle='--', marker = 'o', color='blue')
+    line2, = plt.plot(list2, calcB, label="B", 
+                      linestyle='--', marker = 'o', color='green')
+    line3, = plt.plot(list2, calcC, label="C", 
+                      linestyle='--', marker = 'o', color='red')
+    line4, = plt.plot(list2, calcD, label="D", 
+                      linestyle='--', marker = 'o', color='purple')
+    line5, = plt.plot(list2, calcE, label="E", 
+                      linestyle='--', marker = 'o', color='orange')
+    plt.legend(handles=[line1,line2,line3,line4,line5])
+    plt.xticks(list2)
+    plt.title('Google 5 Page Rank using Calculations with Markov Chains')
+    plt.xlabel('Step Number')
+    plt.ylabel('Probability')
     
 #state3()
 #state3Mult()
 PageRank(0)
+#PageRank(1)
             
         
          
